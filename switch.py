@@ -2,6 +2,7 @@ from gpiozero import LED
 from time import sleep
 
 PRESS_TIME = 0.5
+ON_TIME = 0.0
 
 on = LED(14, active_high = False)
 set = LED(15, active_high = False)
@@ -24,7 +25,8 @@ def tap_off():
 while True:
     tap_on()
     print("ON")
-    sleep(1)
+    sleep(ON_TIME)
     tap_off()
     print("OFF")
     sleep(1)
+    break
