@@ -4,6 +4,7 @@ import time, datetime
 import os, sys
 
 DELAY_TIME = 10
+REQUIRED_HUMIDITY = 85
 
 HOME_DIR = os.path.abspath(os.path.dirname(sys.argv[0])) + "/"
 LOG_FILE = HOME_DIR + "log.log"
@@ -16,6 +17,9 @@ def loop():
     print(temperature, humidity)
     with open(LOG_FILE, "a+") as f:
         f.write(today + ", " + temperature + ", " + humidity + "\n")
+    if h < REQUIRED_HUMIDITY:
+        print("boosting!")
+        switch.tap_on_off()
 
 while True:
     loop()

@@ -21,3 +21,7 @@ def tap_on():
 
 def tap_off():
     press(off_button)
+
+def tap_on_off():
+    tap_on()
+    tap_off()
