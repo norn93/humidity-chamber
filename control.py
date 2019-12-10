@@ -3,7 +3,7 @@ import data
 import time, datetime
 import os, sys
 
-DELAY_TIME = 10
+DELAY_TIME = 60
 REQUIRED_HUMIDITY = 85
 
 HOME_DIR = os.path.abspath(os.path.dirname(sys.argv[0])) + "/"
