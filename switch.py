@@ -1,32 +1,27 @@
 from gpiozero import LED
 from time import sleep
 
-PRESS_TIME = 0.5
+PRESS_DEPRESS_TIME = 0.5
 ON_TIME = 0.0
 
-on = LED(14, active_high = False)
-set = LED(15, active_high = False)
-off = LED(18, active_high = False)
+on_button = LED(14, active_high = False)
+set_button = LED(15, active_high = False)
+off_button = LED(18, active_high = False)
 
 def press(button):
     button.on()
-    sleep(PRESS_TIME)
+    sleep(PRESS_DEPRESS_TIME)
     button.off()
-    sleep(PRESS_TIME)
+    sleep(PRESS_DEPRESS_TIME)
 
 def tap_on():
-    press(on)
-    press(set)
-    press(set)
+    press(on_button)
+    press(set_button)
+    press(set_button)
 
 def tap_off():
-    press(off)
+    press(off_button)
 
-while True:
+def tap_on_off():
     tap_on()
-    print("ON")
-    sleep(ON_TIME)
     tap_off()
-    print("OFF")
-    sleep(1)
-    break
