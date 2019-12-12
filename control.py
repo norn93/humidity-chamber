@@ -4,10 +4,13 @@ import time, datetime
 import os, sys
 
 DELAY_TIME = 60
-REQUIRED_HUMIDITY = 85
 
 HOME_DIR = os.path.abspath(os.path.dirname(sys.argv[0])) + "/"
 LOG_FILE = HOME_DIR + "log.log"
+SETPOINT_FILE = HOME_DIR + "setpoint.txt"
+
+with open(SETPOINT_FILE, "r") as f:
+    REQUIRED_HUMIDITY = int(f.read())
 
 def loop():
     today = str(datetime.datetime.now())
