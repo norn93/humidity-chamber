@@ -1,0 +1,3 @@
+[submodule "sendEmail"]
+	path = sendEmail
+	url = https://github.com/norn93/sendEmail.git
