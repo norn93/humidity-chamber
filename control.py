@@ -22,20 +22,25 @@ with open(SETPOINT_FILE, "r") as f:
 def loop():
     global flag_over_temperature, flag_under_humidity
     today = str(datetime.datetime.now())
-    t, h = data.get_temperature_humidity()
+    try:
+        t, h = data.get_temperature_humidity()
+    except TypeError:
+        print("Failed to read sensor...")
+        t, h = 100, 100
+    print("Got data:", t, h)
     temperature = str(round(t, 2))
     humidity = str(round(h, 2))
     print(temperature, humidity)
     with open(LOG_FILE, "a+") as f:
         f.write(today + ", " + temperature + ", " + humidity + "\n")
     if h < REQUIRED_HUMIDITY:
-        switch.tap_on_off()
+        switch.relay_on_off()
     if h < WARNING_HUMIDITY and flag_under_humidity == False:
         flag_under_humidity = True
-        sendEmail.send(["george.knowlden@gmail.com"], "WARNING: Mushrooms", "Humidity is too low...")
+        #sendEmail.send(["george.knowlden@gmail.com"], "WARNING: Mushrooms", "Humidity is too low...")
     if t > WARNING_TEMPERATURE and flag_over_temperature == False:
         flag_over_temperature = True
-        sendEmail.send(["george.knowlden@gmail.com"], "WARNING: Mushrooms", "Temperature is too high...")
+        #sendEmail.send(["george.knowlden@gmail.com"], "WARNING: Mushrooms", "Temperature is too high...")
     minute = datetime.datetime.now().minute
     if minute == 0: # Reset the flags
         flag_under_humidity = False

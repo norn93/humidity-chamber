@@ -10,3 +10,8 @@ def get_temperature_humidity():
         return temperature, humidity
     else:
         pass
+
+if __name__ == "__main__":
+    while 1:
+        a, b = get_temperature_humidity()
+        print(a, b)
